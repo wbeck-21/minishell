@@ -12,14 +12,62 @@
 # include <sys/ioctl.h>
 # include <signal.h>
 # include <termios.h>
-// # include "parser.h"
-// # include "pipe.h"
 # include "../libft/libft.h"
+
+t_sig	g_sig;
+
+typedef struct s_sig
+{
+	pid_t	pid;
+	int		ex_code;
+}               t_sig;
+
+typedef struct s_lst
+{
+	char			*var;
+	struct s_lst	*next;
+}				t_lst;
+
+typedef struct s_list
+{
+	char			*content;
+	char			**cmd;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct s_cmd
+{
+	t_list	*lst;
+	char	**mypaths;
+	char	*cmd_path;
+	int		in;
+	int		out;
+}				t_cmd;
+
+typedef struct s_proccess
+{
+	int		fds[2];
+	int		fdin;
+	int		fdout;
+}				t_proccess;
+
+typedef struct s_inside_gap2
+{
+	char	in_redirect; // (<)
+	char	out_redirect; // (>)
+	char	pipe; // (|)
+	char	cmd_separator; // бывшая point_coma (;)
+	char	tilda; // (~)
+	char	gap; // (\')  про эту херь не очень понятно
+}				t_inside_gap_2;
+
+// тут про эти символы, и более правильные названия, я их оттуда и взяла 
+// https://www.howtogeek.com/439199/15-special-characters-you-need-to-know-for-bash/ 
 
 typedef struct s_mini
 {
-	t_list				*lst;
-	t_lst				*list;
+	t_list				*list;
+	t_lst				*lst;
 	t_list				*history;
 	t_cmd				cmds;
 	t_proccess			proc;
