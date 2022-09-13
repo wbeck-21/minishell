@@ -1,3 +1,5 @@
+# include "../inc/minishell.h"
+
 t_list	*do_split(char *str)
 {
 	t_list	*list;
