@@ -14,3 +14,16 @@ t_lst	*envp_copy(char *envp[])
 	}
 	return (list);
 }
+
+void minishell(t_mini *mini, char **env, char **str_s)
+{
+	int	i;
+	t_list *tmp;
+
+	i = -1;
+	while (1)
+	{
+		printf("OK");
+		sleep(1);
+	}
+}

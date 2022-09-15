@@ -83,9 +83,9 @@ int	main(int argc, char **argv, char	**envp)
 	g_sig.ex_code = 0;
 	envp = init_shlvl(envp);
 	mini = zero_init(envp);
-	//if (!mini)
-		//return (1);
-	//minishell(mini, envp, strs);
+	if (!mini)
+		return (1);
+	minishell(mini, envp, strs);
 	//free(mini);
 	return (0);
 }

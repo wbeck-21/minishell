@@ -3,7 +3,7 @@ NAME	= minishell
 CC		= gcc
 FLG 	= -Wall -Werror -Wextra -O0 -g
 
-SRC		=     main.c \
+SRC		=     main.c minishell.c \
 			  libft/ft_atoi.c libft/ft_bzero.c libft/ft_calloc.c libft/ft_isalnum.c \
 			  libft/ft_isalpha.c libft/ft_isascii.c libft/ft_isdigit.c libft/ft_isprint.c \
 			  libft/ft_itoa.c libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstclear.c \

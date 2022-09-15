@@ -16,8 +16,6 @@
 # include <sys/ioctl.h>
 # include <signal.h>
 # include <termios.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <stdlib.h>
@@ -25,6 +23,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_sig
 {
@@ -95,5 +95,6 @@ typedef struct s_mini
 }				t_mini;
 
 
-
+void	minishell(t_mini *mini, char **env, char **str_s);
+t_lst	*envp_copy(char *envp[]);
 #endif
