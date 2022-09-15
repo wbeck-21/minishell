@@ -21,6 +21,8 @@ static int init_check(char *str, int *i)
     return (check);
 }
 
+// $? is the return code from the last run process. 
+// 0 means no error happened. Other values represent some kind of unusual condition.
 static char    *special_case(char *str)
 {
     if (!ft_strncmp(str, "$?", 2))
