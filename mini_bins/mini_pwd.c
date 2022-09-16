@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-void mini_pwd(void)
+void    mini_pwd(void)
 {
     char    *dir;
     char    *res;

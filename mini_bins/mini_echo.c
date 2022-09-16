@@ -1,17 +1,17 @@
 #include "../inc/minishell.h"
 
-static int init_check(char *str, int *i)
+static int init_check(char *cmd, int *i)
 {
     int check;
     int j;
 
     check = 0;
-    if (str && !ft_strncmp(str, "-n", 2))
+    if (cmd && !ft_strncmp(cmd, "-n", 2))
     {
         j = 1;
-        while (str[j] && str[j] == 'n')
+        while (cmd[j] && cmd[j] == 'n')
             j++;
-        if (!str[j])
+        if (!cmd[j])
             check = 1;
         else
             check = 0;
@@ -23,36 +23,36 @@ static int init_check(char *str, int *i)
 
 // $? is the return code from the last run process. 
 // 0 means no error happened. Other values represent some kind of unusual condition.
-static char    *special_case(char *str)
+static char    *special_case(char *cmd)
 {
-    if (!ft_strncmp(str, "$?", 2))
+    if (!ft_strncmp(cmd, "$?", 2))
     {
         ft_putchar_fd(g_sig.ex_code, 1);
-        str += 2;
+        cmd += 2;
     }
-    return (str);
+    return (cmd);
 }
 
-static int	tilda(char	*str, char	**envp)
+static int	tilda(char	*cmd, char	**envp)
 {
 	int	i;
 
 	i = 0;
-	if (!ft_strncmp(str, "~", 1))
+	if (!ft_strncmp(cmd, "~", 1))
 	{
 		while (envp[i] && ft_strncmp(envp[i], "HOME=", 5))
 			i++;
 		if (envp[i])
 		{
-			if (!*(str + 1))
+			if (!*(cmd + 1))
 				ft_putstr_fd(envp[i] + 5, 1);
-			else if (*(str + 1) && *(str + 1) == '/')
+			else if (*(cmd + 1) && *(cmd + 1) == '/')
 				ft_putstr_fd(envp[i] + 5, 1);
-			else if (*(str + 1) && *(str + 1) != '/')
+			else if (*(cmd + 1) && *(cmd + 1) != '/')
 			{
 				ft_putstr_fd("minishell: no such user or directory: ", 1);
 				ft_putstr_fd("\033[1;37m", 1);
-				ft_putstr_fd(str + 1, 1);
+				ft_putstr_fd(cmd + 1, 1);
 				return (0);
 			}
 		}
@@ -65,22 +65,22 @@ static int	tilda(char	*str, char	**envp)
 // echo - команда Unix, предназначенная для отображения строки текста (выводит текст на стандартное устройство вывода).  
 // echo -n - не переносит строку
 
-void    mini_echo(char **str, char **envp)
+void    mini_echo(char **cmd, char **envp)
 {
     int check;
     int i;
 
     i = 0;
-    check = init_check(str[1], &i);
-    while (str[++i])
+    check = init_check(cmd[1], &i);
+    while (cmd[++i])
     {
-        if (str[i] && !ft_strncmp(str[i], "-n", 2))
+        if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
             continue;
-        str[i] = special_case(str[i]);
-        if (!tilda(str[i], envp))
-            str[i]++;
-        ft_putchar_fd(str[i], 1);
-        if (str[i + 1])
+        cmd[i] = special_case(cmd[i]);
+        if (!tilda(cmd[i], envp))
+            cmd[i]++;
+        ft_putchar_fd(cmd[i], 1);
+        if (cmd[i + 1])
             ft_putchar_fd(' ', 1);
     }
     if (!check)
