@@ -37,19 +37,19 @@ typedef struct s_list
 
 typedef struct s_cmd
 {
-	t_list	*lst;
-	char	**mypaths;
+	t_list	*list;
+	char	**paths;
 	char	*cmd_path;
 	int		in;
 	int		out;
 }				t_cmd;
 
-typedef struct s_proccess
+typedef struct s_proc
 {
 	int		fds[2];
 	int		fdin;
 	int		fdout;
-}				t_proccess;
+}				t_proc;
 
 typedef struct s_inside_gap2
 {
@@ -70,7 +70,7 @@ typedef struct s_mini
 	t_lst				*lst;
 	t_list				*history;
 	t_cmd				cmds;
-	t_proccess			proc;
+	t_proc				proc;
 	t_inside_gap_2		change;
 	struct sigaction	sig;
 	int					shlvl;
@@ -87,6 +87,9 @@ void    mini_echo(char **cmd, char **envp);
 void	mini_pwd(void);
 void    mini_shlvl(t_mini *mini, char **envp);
 void    mini_unset(t_lst **lst, char **cmd);
+
+void    run_pipes(t_cmd *cmds, t_proc *proc, t_mini *mini, char **envp); // раньше назывался  run
+char    *concat(char *path, char *cmd);
 
 void	minishell(t_mini *mini, char **env, char **str_s);
 t_lst	*envp_copy(char *envp[]);
