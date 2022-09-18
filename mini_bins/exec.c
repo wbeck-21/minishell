@@ -8,8 +8,8 @@ static void    choose(t_mini *mini, char **envp)
         mini_cd(mini->list->cmd[1], &mini->lst);
     else if (!ft_strncmp(mini->list->cmd[0], "echo", 4))
         mini_echo(mini->list->cmd, envp);
-    // else if (!ft_strncmp(mini->list->cmd[0], "pwd", 3))
-    //     mini_export();
+    else if (!ft_strncmp(mini->list->cmd[0], "export", 6))
+        mini_export(&mini->lst, mini->list->cmd);
     else if (!ft_strncmp(mini->list->cmd[0], "unset", 5))
         mini_unset(&mini->lst, mini->list->cmd);
     else if (!ft_strncmp(mini->list->cmd[0], "env", 3))
@@ -23,10 +23,10 @@ static void    choose(t_mini *mini, char **envp)
     else if (!ft_strncmp(mini->list->cmd[0], "./minishell", 11))
     {
         mini_shlvl(mini, envp);
-        // run(&mini->cmds, &mini->proc, mini, envp);
+        run_pipes(&mini->cmds, &mini->proc, mini, envp);
     }    
-    // else
-        // run(&mini->cmds, &mini->proc, mini, envp);
+    else
+        run_pipes(&mini->cmds, &mini->proc, mini, envp);
 }
 
 void    exec(t_mini *mini, char **envp)

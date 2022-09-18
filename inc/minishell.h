@@ -76,9 +76,13 @@ typedef struct s_mini
 	int					shlvl;
 }	t_mini;
 
+
+// utils
 t_list	*do_split(char	*str);
 void	make_split(t_list	**list);
 char	*insert_inside_gap2(t_inside_gap_2	change, char *content);
+int		ft_strcmp(const char *s1, const char *s2);
+
 
 // bash cmbs
 void    mini_cd(char *path, t_lst **lst);
@@ -87,8 +91,12 @@ void    mini_echo(char **cmd, char **envp);
 void	mini_pwd(void);
 void    mini_shlvl(t_mini *mini, char **envp);
 void    mini_unset(t_lst **lst, char **cmd);
+int mini_export(t_lst **lst, char **cmds);
 
-// add mini_echo()
+
+// utils fir bins
+t_lst	*ft_lstlast_rem(t_lst *lst);
+
 
 
 #endif

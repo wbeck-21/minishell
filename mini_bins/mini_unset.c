@@ -12,16 +12,7 @@ static void ft_lstdelone_rem(t_lst	*lst, void (*del)(void *))
 	free(lst);
 }
 
-static t_lst	*ft_lstlast_rem(t_lst *lst)
-{
-	if (!lst)
-		return (0);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-static int  pre_check(char *cmd)
+static int  unset_check(char *cmd)
 {
     if (!cmd)
     {
@@ -38,7 +29,7 @@ void    mini_unset(t_lst **lst, char **cmd)
     int     i;
 
     i = 0;
-    if (!pre_check(cmd[1]))
+    if (!unset_check(cmd[1]))
         return ;
     last = ft_lstlast_rem(*lst);
     g_sig.ex_code = 0;
