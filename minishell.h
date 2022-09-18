@@ -97,4 +97,32 @@ typedef struct s_mini
 
 void	minishell(t_mini *mini, char **env, char **str_s);
 t_lst	*envp_copy(char *envp[]);
+bool	result_line(char	**str, t_list	**history, t_mini	*mini);
+void	handle_free(char	*str, t_list	*history, t_mini	*mini);
+void	del(void *var);
+t_list	*make_history(char	*str, t_list	*lst);
+bool	pre_check(char	*str);
+bool	preparser(char	*str);
+char	*do_gap2(char	*str, int i, t_lst	*list, t_inside_gap_2 change);
+char	*do_gap(char	*str, int i);
+char	*multi_join(char	*str, int i, int j);
+char	*multi_join2(char	*s1, char	*s2, int i, int j);
+bool	was_heredoc(char	*str);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*do_dollar(char	*str, int i, t_lst	*list);
+char	*return_message(char	*str);
+char	*after_check(char	*str, t_mini	*mini);
+void	ft_lstclear_rem(t_lst	**lst, void (*del)(void *));
+void	ft_lstadd_back_rem(t_lst **lst, t_lst *new);
+t_lst	*ft_lstlast_rem(t_lst *lst);
+t_lst	*ft_lstnew_rem(void	*content);
+bool	dollar_valid(char	*str, int *i, int j);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s1);
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*dollar_join(char	*tmp, char	*str, int i, int j);
 #endif

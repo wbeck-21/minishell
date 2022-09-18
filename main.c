@@ -1,5 +1,18 @@
 #include "minishell.h"
 #include "libft/libft.h"
+
+void	handle_free(char	*str, t_list	*history, t_mini	*mini)
+{
+	ft_putstr_fd("exit\n", 2);
+	free(str);
+	if (history)
+		ft_lstclear(&history, free);
+	if (mini->lst)
+		ft_lstclear(&mini->lst, free);
+	ft_lstclear_rem(&mini->list, del);
+	exit(EXIT_FAILURE);
+}
+
 void	actions(int signal_num, siginfo_t *info, void *old_info)
 {
 	(void)info;
