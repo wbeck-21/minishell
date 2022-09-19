@@ -76,3 +76,4 @@ bool	result_line(char	**str, t_list	**history, t_mini	*mini)
         return (false);
     return (true);
 }
+//sudo apt-get install libreadline-dev 

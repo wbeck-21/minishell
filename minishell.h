@@ -125,4 +125,8 @@ t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*dollar_join(char	*tmp, char	*str, int i, int j);
+bool	check_pipes(char	*str);
+void	ft_putendl_fd(char *s, int fd);
+char	*redirect(char	*str, t_mini	**mini);
+bool	ft_iskey(char c);
 #endif
