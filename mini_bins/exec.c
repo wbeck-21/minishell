@@ -16,8 +16,8 @@ static void    choose(t_mini *mini, char **envp)
         mini_env(mini->lst);
     else if (!ft_strncmp(mini->list->cmd[0], "exit", 4))
         mini_exit(mini->list->cmd[1]);
-    // else if (!ft_strncmp(mini->list->cmd[0], "pwd", 3))
-    //     mini_history();
+    else if (!ft_strncmp(mini->list->cmd[0], "history", 3))
+        mini_history(mini->history);
     else if (!ft_strncmp(mini->list->cmd[0], "$?", 2))
         mini_dq(mini->list->cmd[0]);
     else if (!ft_strncmp(mini->list->cmd[0], "./minishell", 11))
