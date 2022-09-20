@@ -25,5 +25,6 @@ void minishell(t_mini *mini, char **env, char **str_s)
 	{
 		printf("OK");
 		sleep(1);
+		exec(mini, env);
 	}
 }
