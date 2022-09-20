@@ -6,11 +6,19 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:12:56 by anastasia         #+#    #+#             */
-/*   Updated: 2022/09/20 22:19:46 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/09/20 22:25:54 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void mini_dup2(t_mini    *mini)
+{
+    if (mini->proc.fdin > 0)
+        dup2(mini->cmds.in, STDIN_FILENO);
+    if (mini->proc.fdout > 0)
+        dup2(mini->cmds.out, STDOUT_FILENO);
+}
 
 static void    choose(t_mini *mini, char **envp)
 {
@@ -46,7 +54,7 @@ void    exec(t_mini *mini, char **envp)
     while (mini->list)
     {
         choose(mini, envp);
+        mini_dup2(mini);
         mini->list = mini->list->next;
-    }
-    
+    } 
 }
