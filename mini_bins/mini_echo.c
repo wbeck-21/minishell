@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_echo.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/20 22:20:04 by wbeck             #+#    #+#             */
+/*   Updated: 2022/09/20 22:20:05 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 static int init_check(char *cmd, int *i)
@@ -65,7 +77,7 @@ static int	tilda(char	*cmd, char	**envp)
 // echo - команда Unix, предназначенная для отображения строки текста (выводит текст на стандартное устройство вывода).  
 // echo -n - не переносит строку
 
-void    mini_echo(char **cmd, char **envp)
+int    mini_echo(char **cmd, char **envp)
 {
     int check;
     int i;
@@ -86,4 +98,5 @@ void    mini_echo(char **cmd, char **envp)
     if (!check)
         ft_putchar_fd('\n', 1);
     g_sig.ex_code = 0;
+    return (0);
 }

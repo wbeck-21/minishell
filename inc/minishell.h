@@ -85,14 +85,16 @@ int		ft_strcmp(const char *s1, const char *s2);
 
 
 // bash cmbs
-void    mini_cd(char *path, t_lst **lst);
 void    mini_dq(char *cmd);
-void    mini_echo(char **cmd, char **envp);
 void	mini_pwd(void);
 void    mini_shlvl(t_mini *mini, char **envp);
 void    mini_unset(t_lst **lst, char **cmd);
-int mini_export(t_lst **lst, char **cmds);
-
+void    mini_exit(char *cmd);
+int 	mini_env(t_lst *lst);
+int	    mini_echo(char **cmd, char **envp);
+int	    mini_cd(char *path, t_lst **lst);
+int		mini_export(t_lst **lst, char **cmds);
+int		mini_history(t_list *history);
 
 // utils fir bins
 t_lst	*ft_lstlast_rem(t_lst *lst);
