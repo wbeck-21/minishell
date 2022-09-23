@@ -1,6 +1,8 @@
 #include "minishell.h"
 #include "libft/libft.h"
 
+struct s_sig	g_sig;
+
 void	handle_free(char	*str, t_list	*history, t_mini	*mini)
 {
 	ft_putstr_fd("exit\n", 2);

@@ -1,5 +1,35 @@
 #include "minishell.h"
 
+char	*free_fd(char	*str, char *filename, int j, int i)
+{
+	char	*res;
+	char	*tmp;
+
+	res = ft_substr(str, 0, i);
+	tmp = ft_strdup(str + ft_strlen(filename) + j);
+	res = ft_strjoin(res, tmp);
+	free (tmp);
+	free (filename);
+	free (str);
+	return (res);
+}
+
+char	*get_filename(char	*str, int i, int *j)
+{
+	while (*(str + i) && *(str + i) == ' ' )
+		i++;
+	if (!*(str + i))
+		return (NULL);
+	*j = i;
+	while (*(str + i) && *(str + i) != ' ')
+	{
+		if (*(str + i) == '>' && *(str + i - 1) == ' ')
+			return (NULL);
+		i++;
+	}
+	return (ft_substr(str, *j, i - *j));
+}
+
 char	*multi_join(char	*str, int i, int j)
 {
 	char	*tmp1;
@@ -19,6 +49,11 @@ char	*multi_join(char	*str, int i, int j)
 		free(tmp2);
 	}
 	return (res);
+}
+
+bool	ft_iskey(char c)
+{
+	return (c == '_' || ft_isalnum(c));
 }
 
 char	*multi_join2(char	*s1, char	*s2, int i, int j)

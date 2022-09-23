@@ -1,9 +1,10 @@
 NAME	= minishell
 
 CC		= gcc
-FLG 	= -Wall -Werror -Wextra -O0 -g
+FLG 	= -g -Wall -Werror -Wextra -MMD
+L_FLG = -L /Users/${USER}/.brew/opt/readline/lib 
 
-SRC		=     main.c minishell.c do_symbol.c history.c parser.c utils.c utils_1.c utils_3.c utils_4.c redirect.c pipe,c \
+SRC		=     main.c minishell.c do_symbol.c history.c parser.c utils.c utils_1.c utils_3.c utils_4.c redirect.c pipe.c utils_2.c lists.c \
 			  libft/ft_atoi.c libft/ft_bzero.c libft/ft_calloc.c libft/ft_isalnum.c \
 			  libft/ft_isalpha.c libft/ft_isascii.c libft/ft_isdigit.c libft/ft_isprint.c \
 			  libft/ft_itoa.c libft/ft_lstadd_back.c libft/ft_lstadd_front.c libft/ft_lstclear.c \
@@ -14,9 +15,11 @@ SRC		=     main.c minishell.c do_symbol.c history.c parser.c utils.c utils_1.c u
 			  libft/ft_strchr.c libft/ft_strdup.c libft/ft_striteri.c libft/ft_strjoin.c \
 			  libft/ft_strlcat.c libft/ft_strlcpy.c libft/ft_strlen.c libft/ft_strmapi.c \
 			  libft/ft_strncmp.c libft/ft_strnstr.c libft/ft_strrchr.c libft/ft_strtrim.c \
-			  libft/ft_substr.c libft/ft_tolower.c libft/ft_toupper.c 
+			  libft/ft_substr.c libft/ft_tolower.c libft/ft_toupper.c libft/get_next_line.c \
+			  libft/get_next_line_utils.c 
 
 OBJ 	= $(SRC:.c=.o)
+DF		= $(SRC:.c=.d)
 RM 			= rm -rf
 
 %.o: %.c
@@ -25,10 +28,10 @@ RM 			= rm -rf
 all: 		$(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC) $(FLG) -o $(NAME) $^
+			$(CC) $(FLG) $(L_FLG) $(OBJ) -o $(NAME) -lreadline
 
 clean:
-	@$(RM) $(OBJ)
+	@$(RM) $(OBJ) $(DF)
 
 fclean: clean
 	@$(RM) $(NAME)

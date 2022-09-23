@@ -25,6 +25,7 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+//# include "libft/libft.h"
 
 typedef struct s_sig
 {
@@ -32,7 +33,7 @@ typedef struct s_sig
 	int		ex_code;
 }				t_sig;
 
-t_sig	g_sig;
+extern struct s_sig	g_sig;
 
 typedef struct s_list
 {
@@ -80,8 +81,6 @@ typedef struct s_inside_gap2
 	char	gap;
 } t_inside_gap_2;
 
-
-
 typedef struct s_mini
 {
 	t_list				*lst;
@@ -123,10 +122,24 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
+int	ft_isdigit(int c);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_lstclear(t_list **lst, void (*del)(void*));
+char	*ft_itoa(int n);;
+void	ft_putstr_fd(char *s, int fd);
 char	*dollar_join(char	*tmp, char	*str, int i, int j);
 bool	check_pipes(char	*str);
 void	ft_putendl_fd(char *s, int fd);
 char	*redirect(char	*str, t_mini	**mini);
 bool	ft_iskey(char c);
+char	*input(char	*str, int *i, t_mini	**mini);
+char	*get_filename(char	*str, int i, int *j);
+char	*free_fd(char	*str, char *filename, int j, int i);
+char	*read_heredoc(char	*lim, char	*str, int i, int j);
+bool	check_filename(char	*filename, char	*str);
+int	get_size_pipes(char const	*s, char c);
+void	ft_lstdelone_rem(t_lst	*lst, void (*del)(void *));
+int	ft_isalnum(int c);
+int		ft_atoi(const char *str);
+
 #endif

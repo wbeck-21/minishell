@@ -23,6 +23,14 @@ void	ft_lstclear_rem(t_lst	**lst, void (*del)(void *))
 	}
 }
 
+void	ft_lstdelone_rem(t_lst	*lst, void (*del)(void *))
+{
+	if (!lst)
+		return ;
+	(*del)(lst->var);
+	free(lst);
+}
+
 void	ft_lstadd_back_rem(t_lst **lst, t_lst *new)
 {
 	if (*lst)

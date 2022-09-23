@@ -1,5 +1,95 @@
 #include "minishell.h"
 
+static char	*append_out(char	*str, int *i, t_mini	**mini)
+{
+	char	*filename;
+	int		j;
+
+	j = 0;
+	filename = get_filename(str, *i + 2, &j);
+	if (!filename || !ft_strncmp(filename, "<", 1)
+		|| !ft_strncmp(filename, ">", 1))
+	{
+		ft_putendl_fd(ERROR"Redirect error"TEXT, 2);
+		free(str);
+		return (NULL);
+	}
+	(*mini)->proc.fdout = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	dup2((*mini)->proc.fdout, STDOUT_FILENO);
+	close((*mini)->proc.fdout);
+	return (free_fd(str, filename, j, *i));
+}
+
+static char	*trunc_out(char	*str, int *i, t_mini	**mini)
+{
+	char	*filename;
+	int		j;
+
+	j = 0;
+	filename = get_filename(str, *i + 1, &j);
+	if (!filename || !ft_strncmp(filename, "<", 1)
+		|| !ft_strncmp(filename, ">", 1))
+	{
+		ft_putendl_fd(ERROR"Redirect error"TEXT, 2);
+		free(str);
+		return (NULL);
+	}
+	if (!check_filename(filename, str))
+		return (NULL);
+	(*mini)->proc.fdout = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	dup2((*mini)->proc.fdout, STDOUT_FILENO);
+	close((*mini)->proc.fdout);
+	return (free_fd(str, filename, j, *i));
+}
+
+static char	*heredoc(char	*str, int *i, t_mini	**mini)
+{
+	int		j;
+	char	*lim;
+	char	*tmp;
+
+	lim = get_filename(str, *i + 2, &j);
+	if (!lim)
+	{
+		ft_putendl_fd(ERROR"Redirect error"TEXT, 2);
+		free(str);
+		return (NULL);
+	}
+	tmp = read_heredoc(lim, str, *i, j);
+	if (tmp)
+		return (tmp);
+	(*mini)->proc.fdin = open("heredoc", O_RDONLY, 0644);
+	dup2((*mini)->proc.fdin, STDIN_FILENO);
+	close((*mini)->proc.fdin);
+	return (free_fd(str, lim, j, *i));
+}
+
+char	*input(char	*str, int *i, t_mini	**mini)
+{
+	char	*filename;
+	int		j;
+
+	j = 0;
+	filename = get_filename(str, *i + 1, &j);
+	if (!filename || !ft_strncmp(filename, "<", 1)
+		|| !ft_strncmp(filename, ">", 1))
+	{
+		ft_putendl_fd(ERROR"Redirect error"TEXT, 2);
+		free(str);
+		return (NULL);
+	}
+	(*mini)->proc.fdin = open(filename, O_RDONLY);
+	if ((*mini)->proc.fdin < 0)
+	{
+		printf(ERROR"minishell: no such file or directory: %s\n"TEXT, filename);
+		return (free_fd(str, filename, j, *i));
+	}
+	dup2((*mini)->proc.fdin, STDIN_FILENO);
+	close((*mini)->proc.fdin);
+	return (free_fd(str, filename, j, *i));
+}
+
+
 char	*redirect(char	*str, t_mini	**mini)
 {
 	int	i;
