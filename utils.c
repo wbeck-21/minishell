@@ -38,16 +38,20 @@ char	*multi_join(char	*str, int i, int j)
 
 	tmp2 = NULL;
 	res = ft_substr(str, 0, j);
+	printf("MULTI JOIN res %s\n", res);
 	tmp1 = ft_substr(str, j + 1, i - j - 1);
+	printf("MULTI JOIN tmp1 %s\n", res);
 	if (*(str + i))
 		tmp2 = ft_strdup(str + i + 1);
 	res = ft_strjoin(res, tmp1);
+	printf("MULTI JOIN res %s\n", res);
 	free(tmp1);
 	if (tmp2)
 	{
 		res = ft_strjoin(res, tmp2);
 		free(tmp2);
 	}
+	printf("MULTI JOIN res %s\n", res);
 	return (res);
 }
 

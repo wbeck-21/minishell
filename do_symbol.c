@@ -24,11 +24,11 @@ char	*do_gap2(char	*str, int i, t_lst	*list, t_inside_gap_2 change)
 		if (*(str + i) == '|')
 			*(str + i) = change.pipe;
 		if (*(str + i) == '<')
-			*(str + i) = change.red_in;
+			*(str + i) = change.in_redirect;
 		if (*(str + i) == '>')
-			*(str + i) = change.red_out;
+			*(str + i) = change.out_redirect;
 		if (*(str + i) == ';')
-			*(str + i) = change.point_coma;
+			*(str + i) = change.cmd_separator;
 		if (*(str + i) == '~')
 			*(str + i) = change.tilda;
 		if (*(str + i) == '\'')

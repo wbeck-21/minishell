@@ -4,6 +4,7 @@
 # define MINISHELL "\033[1;33m"
 # define TEXT "\033[1;37m"
 # define ERROR "\033[1;31m"
+# define EXIT "minishell: exit: a: numeric argument required"
 
 # include <signal.h>
 # include <stdio.h>
@@ -73,18 +74,18 @@ typedef struct s_pre
 
 typedef struct s_inside_gap2
 {
-	char	red_in;
-	char	red_out;
-	char	pipe;
-	char	point_coma;
-	char	tilda;
-	char	gap;
-} t_inside_gap_2;
+	char	in_redirect; // (<)
+	char	out_redirect; // (>)
+	char	pipe; // (|)
+	char	cmd_separator; // бывшая point_coma (;)
+	char	tilda; // (~)
+	char	gap; // (\')  про эту херь не очень понятно
+}				t_inside_gap_2;
 
 typedef struct s_mini
 {
-	t_list				*lst;
-	t_lst				*list;
+	t_list				*list;
+	t_lst				*lst;
 	t_list				*history;
 	t_cmd				cmds;
 	t_proccess			proc;
@@ -141,5 +142,31 @@ int	get_size_pipes(char const	*s, char c);
 void	ft_lstdelone_rem(t_lst	*lst, void (*del)(void *));
 int	ft_isalnum(int c);
 int		ft_atoi(const char *str);
-
+t_list	*do_split(char	*str);
+void	free_mem(char	**strs);
+char	*insert_inside_gap2(t_inside_gap_2	change, char *content);
+void	make_split(t_list **list);
+int    mini_cd(char *path, t_lst **lst);
+void    mini_dq(char *cmd);
+void    mini_dq(char *cmd);
+int    mini_echo(char **cmd, char **envp);
+int 	mini_env(t_lst *lst);
+void    mini_exit(char *cmd);
+int mini_export(t_lst **lst, char **cmds);
+int mini_history(t_list *history);
+void    mini_pwd(void);
+void    mini_shlvl(t_mini *mini, char **envp);
+void    mini_unset(t_lst **lst, char **cmd);
+void    ft_lstadd_preback(t_lst **lst, t_lst *new);
+void    exec(t_mini *mini, char **envp);
+char	**ft_split(char const *s, char c);
+void	run_pipes(t_cmd	*cmds, t_proccess	*proc, t_mini	*mini, char	**envp);
+void	init_cmd_path(t_cmd	**cmds);
+int	ft_lstsize(t_list *lst);
+bool	init_env(t_lst	*list, t_cmd	*cmds);
+char	*double_join(char	*s1, char	*s2);
+void	wait_func(t_mini	*mini, int size);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putchar_fd(char c, int fd);
+t_lst	*ft_lstlastlast(t_lst *lst);
 #endif

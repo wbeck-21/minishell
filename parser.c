@@ -21,30 +21,52 @@ bool	preparser(char	*str)
 	return (true);
 }
 
+t_list	*do_split(char	*str)
+{
+	t_list	*list;
+	t_list	*new;
+	char	**strs;
+	int		i;
+
+	i = 0;
+	list = NULL;
+	strs = ft_split(str, '|');
+	while (strs[i])
+	{
+		new = ft_lstnew(strs[i]);
+		ft_lstadd_back(&list, new);
+		i++;
+	}
+	free_mem(strs);
+	return (list);
+}
+
 char *parser(char *str, t_mini *mini, int i, int flag)
 {
+    //printf("PARSER START\n");
     if (!pre_check(str))
         return (NULL);
     while (*(str + i))
     {
         if (*(str + i) == '\'')
         {
+            //printf("WILL GAP\n");
             while (*(str + i) == '\'')
             {
                 flag++;
 
-                printf("BEFORE GAP %s\n", str);
+                //printf("BEFORE GAP %s\n", str);
                 str = do_gap(str, i);
-                printf("AFTER GAP %s\n", str);
+                //printf("AFTER GAP %s\n", str);
             }
         }
         else if (*(str + i) == '\"' && flag % 2 == 0)
             while (*(str + i) == '\"')
-                str = do_gap2(str, i, mini->list, mini->change);
+                str = do_gap2(str, i, mini->lst, mini->change);
         else if (*(str + i) == '$' && ft_strncmp("$?", str + i, 2)
                 && ft_strcmp(str + i, "$") && !was_heredoc(str) && flag % 2 == 0)
                 while (*(str + i) == '$')
-                    str = do_dollar(str, i, mini->list);
+                    str = do_dollar(str, i, mini->lst);
         else if (*(str + i) == '\\' || *(str + i) == ';')
             return (return_message(str));
         else
@@ -62,11 +84,14 @@ bool	result_line(char	**str, t_list	**history, t_mini	*mini)
     i = 0;
     while (**str != '\0' && (**str == ' ' || **str == '\t'))
         (*str)++; // пропускаем пробелы и табуляцию
+    //printf("WE STAY AT %s char %c\n", *str, **str);
     if (!*str[i])
         return (false); // проверка на нуль
     *history = make_history(*str, *history);
+    //printf("HISTORY %s\n", (*history)->content);
     add_history(*str);
     *str = parser(*str, mini, 0, 0);
+    //printf("AFTER PARSER %s\n", (*str));
     if (!*str)
         return (false);
     i = 0;

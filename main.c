@@ -10,8 +10,8 @@ void	handle_free(char	*str, t_list	*history, t_mini	*mini)
 	if (history)
 		ft_lstclear(&history, free);
 	if (mini->lst)
-		ft_lstclear(&mini->lst, free);
-	ft_lstclear_rem(&mini->list, del);
+		ft_lstclear(&mini->list, free);
+	ft_lstclear_rem(&mini->lst, del);
 	exit(EXIT_FAILURE);
 }
 
@@ -50,13 +50,13 @@ t_mini	*zero_init(char	**envp)
 	mini = (t_mini *) malloc(sizeof(t_mini));
 	if (!mini)
 		return (NULL);
-	mini->change.red_in = 1;
-	mini->change.red_out = 2;
+	mini->change.in_redirect = 1;
+	mini->change.out_redirect= 2;
 	mini->change.pipe = 3;
-	mini->change.point_coma = 4;
+	mini->change.cmd_separator = 4;
 	mini->change.tilda = 5;
 	mini->change.gap = 6;
-	mini->list = envp_copy(envp);
+	mini->lst = envp_copy(envp);
 	mini->cmds.in = dup(STDIN_FILENO);
 	mini->cmds.out = dup(STDOUT_FILENO);
 	mini->sig.sa_sigaction = actions;
