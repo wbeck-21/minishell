@@ -43,21 +43,16 @@ t_list	*do_split(char	*str)
 
 char *parser(char *str, t_mini *mini, int i, int flag)
 {
-    //printf("PARSER START\n");
     if (!pre_check(str))
         return (NULL);
     while (*(str + i))
     {
         if (*(str + i) == '\'')
         {
-            //printf("WILL GAP\n");
             while (*(str + i) == '\'')
             {
                 flag++;
-
-                //printf("BEFORE GAP %s\n", str);
                 str = do_gap(str, i);
-                //printf("AFTER GAP %s\n", str);
             }
         }
         else if (*(str + i) == '\"' && flag % 2 == 0)
@@ -79,19 +74,16 @@ bool	result_line(char	**str, t_list	**history, t_mini	*mini)
 {
     int i;
 
-    if (!str)
-        handle_free(*str, *history, mini); // строка и остальное чистится, если мы ничего не ввели
+    if (!*str)
+        handle_free(*str, *history, mini);
     i = 0;
     while (**str != '\0' && (**str == ' ' || **str == '\t'))
-        (*str)++; // пропускаем пробелы и табуляцию
-    //printf("WE STAY AT %s char %c\n", *str, **str);
+        (*str)++; 
     if (!*str[i])
-        return (false); // проверка на нуль
+        return (false); 
     *history = make_history(*str, *history);
-    //printf("HISTORY %s\n", (*history)->content);
     add_history(*str);
     *str = parser(*str, mini, 0, 0);
-    //printf("AFTER PARSER %s\n", (*str));
     if (!*str)
         return (false);
     i = 0;

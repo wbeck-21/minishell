@@ -44,7 +44,6 @@ void minishell(t_mini *mini, char **env, char **str_s)
 	i = -1;
 	while (1)
 	{
-		printf("OK");
 		dup2(mini->cmds.in, STDIN_FILENO);
 		dup2(mini->cmds.out, STDOUT_FILENO);
 		sigaction(SIGQUIT, &mini->sig, NULL);
@@ -54,14 +53,12 @@ void minishell(t_mini *mini, char **env, char **str_s)
 			continue;
 		mini->list = do_split(str_s[i]);
 		free(str_s[i]);
-		
 		tmp = mini->list;
 		while (tmp)
 		{
 			tmp->content = insert_inside_gap2(mini->change, tmp->content);
 			tmp = tmp->next;
 		}
-		
 		make_split(&mini->list);
 		exec(mini, env);
 		special_free(mini);

@@ -45,7 +45,7 @@ static int  change_pwd(char *pwd, char *old_pwd, t_lst **lst)
     return (1);
 }
 
-static char    *pwd_cur(void)
+char    *pwd_cur(void)
 {
     char    *dir;
     char    *res;
@@ -89,7 +89,7 @@ int    mini_cd(char *path, t_lst **lst)
     char    *pwd;
     char    *old_pwd;
     char    *tmp;
-    (void)pwd;
+    
 	g_sig.ex_code = 0;
     if (!path || !ft_strncmp(path, "~", 1) || !ft_strncmp(path, "~/", 2))
     {

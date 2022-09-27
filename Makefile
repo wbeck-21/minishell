@@ -1,7 +1,7 @@
 NAME	= minishell
 
 CC		= gcc
-FLG 	= -g -Wall -Werror -Wextra -MMD
+FLG 	= -g -MMD
 L_FLG = -L /Users/${USER}/.brew/opt/readline/lib 
 
 SRC		=     main.c minishell.c do_symbol.c history.c parser.c utils.c utils_1.c utils_3.c utils_4.c redirect.c pipe.c utils_2.c lists.c init_pipe.c\

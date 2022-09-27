@@ -94,7 +94,7 @@ typedef struct s_mini
 	int					shlvl;
 }				t_mini;
 
-
+char    *pwd_cur(void);
 void	minishell(t_mini *mini, char **env, char **str_s);
 t_lst	*envp_copy(char *envp[]);
 bool	result_line(char	**str, t_list	**history, t_mini	*mini);

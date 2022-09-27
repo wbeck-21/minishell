@@ -62,7 +62,7 @@ t_mini	*zero_init(char	**envp)
 	mini->sig.sa_sigaction = actions;
 	mini->sig.sa_flags = SA_SIGINFO;
 	mini->history = NULL;
-	mini->lst = NULL;
+	mini->list = NULL;
 	return (mini);
 }
 
@@ -101,6 +101,6 @@ int	main(int argc, char **argv, char	**envp)
 	if (!mini)
 		return (1);
 	minishell(mini, envp, strs);
-	//free(mini);
+	free(mini);
 	return (0);
 }
