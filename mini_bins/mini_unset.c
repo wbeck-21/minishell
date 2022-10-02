@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:20:34 by wbeck             #+#    #+#             */
-/*   Updated: 2022/09/20 22:20:34 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/10/01 16:49:28 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // Следует использовать команду unset для
 // удаления переменной из вашего окружения 
 // командной оболочки.
-
 
 static int  unset_check(char *cmd)
 {
@@ -26,6 +25,18 @@ static int  unset_check(char *cmd)
         return (0);
     }
     return (1);
+}
+
+static bool	check_equal(char	**cmd, int	*i)
+{
+	if (ft_strchr(cmd[*i], '='))
+	{
+		ft_putendl_fd(ERROR"unset: option '=' is illigal"TEXT, 2);
+		g_sig.ex_code = 1;
+		(*i)++;
+		return (false);
+	}
+	return (true);
 }
 
 void    mini_unset(t_lst **lst, char **cmd)
@@ -40,13 +51,18 @@ void    mini_unset(t_lst **lst, char **cmd)
     g_sig.ex_code = 0;
     while (cmd[++i])
     {
-        if (!ft_strncmp((*lst)->var, cmd[i], ft_strlen(cmd[i])))
+        if (!check_equal(cmd, &i))
+			break ;
+        while ((*lst)->next)
         {
-            last = (*lst)->next;
-            ft_lstdelone_rem(*lst, del);
-            *lst = last;
-            break ;
+            if (!ft_strncmp((*lst)->var, cmd[i], ft_strlen(cmd[i])))
+            {
+                last = (*lst)->next;
+                ft_lstdelone_rem(*lst, del);
+                *lst = last;
+                break ;
+            }
+            lst = &(*lst)->next;
         }
-        lst = &(*lst)->next;
     }
 }

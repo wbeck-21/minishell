@@ -9,7 +9,7 @@ void	handle_free(char	*str, t_list	*history, t_mini	*mini)
 	free(str);
 	if (history)
 		ft_lstclear(&history, free);
-	if (mini->lst)
+	if (mini->list)
 		ft_lstclear(&mini->list, free);
 	ft_lstclear_rem(&mini->lst, del);
 	exit(EXIT_FAILURE);

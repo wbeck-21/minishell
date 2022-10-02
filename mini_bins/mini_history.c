@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:20:20 by wbeck             #+#    #+#             */
-/*   Updated: 2022/09/20 22:20:21 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/10/02 12:30:04 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void print_history(t_list    *history, int i)
     while (history)
     {
         i++;
-        ft_putstr_fd(" ", 1);
+        ft_putstr_fd("  ", 1);
         ft_putnbr_fd(i, 1);
-        ft_putstr_fd(" ", 1);
+        ft_putstr_fd("  ", 1);
         ft_putendl_fd(history->content, 1);
         history = history->next;
     }

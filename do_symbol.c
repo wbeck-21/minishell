@@ -1,43 +1,5 @@
 #include "minishell.h"
 
-char	*do_gap(char	*str, int i)
-{
-	int	j;
-
-	j = i;
-	i++;
-	while (*(str + i))
-		i++;
-	return (multi_join(str, i, j));
-}
-
-char	*do_gap2(char	*str, int i, t_lst	*list, t_inside_gap_2 change)
-{
-	int	j;
-
-	j = i;
-	i++;
-	while (*(str + i) && *(str + i) != '\"')
-	{
-		if (*(str + i) == '$' && !was_heredoc(str))
-			str = do_dollar(str, i, list);
-		if (*(str + i) == '|')
-			*(str + i) = change.pipe;
-		if (*(str + i) == '<')
-			*(str + i) = change.in_redirect;
-		if (*(str + i) == '>')
-			*(str + i) = change.out_redirect;
-		if (*(str + i) == ';')
-			*(str + i) = change.cmd_separator;
-		if (*(str + i) == '~')
-			*(str + i) = change.tilda;
-		if (*(str + i) == '\'')
-			*(str + i) = change.gap;
-		i++;
-	}
-	return (multi_join(str, i, j));
-}
-
 bool	was_heredoc(char	*str)
 {
 	int	i;
@@ -87,4 +49,42 @@ char	*do_dollar(char	*str, int i, t_lst	*list)
 		return (multi_join2(str, res, i, j));
 	}
 	return (dollar_join(tmp, str, i, j));
+}
+
+char	*do_gap(char	*str, int i)
+{
+	int	j;
+
+	j = i;
+	i++;
+	while (*(str + i))
+		i++;
+	return (multi_join(str, i, j));
+}
+
+char	*do_gap2(char	*str, int i, t_lst	*list, t_inside_gap_2 change)
+{
+	int	j;
+
+	j = i;
+	i++;
+	while (*(str + i) && *(str + i) != '\"')
+	{
+		if (*(str + i) == '$' && !was_heredoc(str))
+			str = do_dollar(str, i, list);
+		if (*(str + i) == '|')
+			*(str + i) = change.pipe;
+		if (*(str + i) == '<')
+			*(str + i) = change.in_redirect;
+		if (*(str + i) == '>')
+			*(str + i) = change.out_redirect;
+		if (*(str + i) == ';')
+			*(str + i) = change.cmd_separator;
+		if (*(str + i) == '~')
+			*(str + i) = change.tilda;
+		if (*(str + i) == '\'')
+			*(str + i) = change.gap;
+		i++;
+	}
+	return (multi_join(str, i, j));
 }

@@ -18,6 +18,7 @@ char	*return_message(char	*str)
 	ft_putendl_fd(ERROR"Parsing error (undefined symbol)"TEXT, 2);
 	return (NULL);
 }
+
 void	free_mem(char	**strs)
 {
 	int	i;

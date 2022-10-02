@@ -43,31 +43,31 @@ t_list	*do_split(char	*str)
 
 char *parser(char *str, t_mini *mini, int i, int flag)
 {
-    if (!pre_check(str))
-        return (NULL);
-    while (*(str + i))
-    {
-        if (*(str + i) == '\'')
-        {
-            while (*(str + i) == '\'')
-            {
-                flag++;
-                str = do_gap(str, i);
-            }
-        }
-        else if (*(str + i) == '\"' && flag % 2 == 0)
-            while (*(str + i) == '\"')
-                str = do_gap2(str, i, mini->lst, mini->change);
-        else if (*(str + i) == '$' && ft_strncmp("$?", str + i, 2)
-                && ft_strcmp(str + i, "$") && !was_heredoc(str) && flag % 2 == 0)
-                while (*(str + i) == '$')
-                    str = do_dollar(str, i, mini->lst);
-        else if (*(str + i) == '\\' || *(str + i) == ';')
-            return (return_message(str));
-        else
-            i++;
-    }
-    return (after_check(str, mini));
+   if (!pre_check(str))
+		return (NULL);
+	while (*(str + i))
+	{
+		if (*(str + i) == '\'')
+		{
+			while (*(str + i) == '\'')
+			{
+				flag++;
+				str = do_gap(str, i);
+			}
+		}
+		else if (*(str + i) == '\"' && flag % 2 == 0)
+			while (*(str + i) == '\"')
+				str = do_gap2(str, i, mini->lst, mini->change);
+		else if (*(str + i) == '$' && ft_strncmp("$?", str + i, 2)
+			&& ft_strcmp(str + i, "$") && !was_heredoc(str) && flag % 2 == 0)
+			while (*(str + i) == '$')
+				str = do_dollar(str, i, mini->lst);
+		else if (*(str + i) == '\\' || *(str + i) == ';')
+			return (return_message(str));
+		else
+			i++;
+	}
+	return (after_check(str, mini));
 }
 
 bool	result_line(char	**str, t_list	**history, t_mini	*mini)

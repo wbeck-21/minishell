@@ -32,7 +32,7 @@ ${NAME}: ${OBJS}
 			ranlib ${NAME}
 
 %.o:	%.c ${LIBH}
-			${CC} ${FLAGS} -c $< -o $@
+			@${CC} ${FLAGS} -c $< -o $@
 
 clean:
 		$(RM) $(OBJS)

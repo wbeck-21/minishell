@@ -40,7 +40,7 @@ void minishell(t_mini *mini, char **env, char **str_s)
 {
 	int	i;
 	t_list *tmp;
-	(void)env;
+
 	i = -1;
 	while (1)
 	{

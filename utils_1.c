@@ -23,20 +23,20 @@ char	*insert_inside_gap2(t_inside_gap_2	change, char *content) // возвращ
 	int	i;
 
 	i = -1;
-	while (*(content + ++i)) //  после строки смотрим по символьно и ищем символы
+	while (*(content + ++i))
 	{
-		if (*(content + i) == change.in_redirect)
-			*(content + 1) = '<';
-		if (*(content + i) == change.out_redirect)
-			*(content + 1) = '>';
 		if (*(content + i) == change.pipe)
-			*(content + 1) = '|';
-		if (*(content + i) == change.cmd_separator)
-			*(content + 1) = ';';
-		if (*(content + i) == change.tilda)
-			*(content + 1) = '~';
-		if (*(content + i) == change.gap)
-			*(content + 1) = '\'';
+			*(content + i) = '|';
+		else if (*(content + i) == change.in_redirect)
+			*(content + i) = '<';
+		else if (*(content + i) == change.out_redirect)
+			*(content + i) = '>';
+		else if (*(content + i) == change.cmd_separator)
+			*(content + i) = ';';
+		else if (*(content + i) == change.tilda)
+			*(content + i) = '~';
+		else if (*(content + i) == change.gap)
+			*(content + i) = '\'';
 	}
 	return (content);
 }

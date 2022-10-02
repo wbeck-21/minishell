@@ -15,15 +15,15 @@ void	init_cmd_path(t_cmd	**cmds)
 	int		i;
 
 	i = 0;
-	if (!access((*cmds)->lst->cmd[0], F_OK))
+	if (!access((*cmds)->list->cmd[0], F_OK))
 	{
-		(*cmds)->cmd_path = ft_strdup((*cmds)->lst->cmd[0]);
+		(*cmds)->cmd_path = ft_strdup((*cmds)->list->cmd[0]);
 		return ;
 	}
 	while ((*cmds)->mypaths[i])
 	{
 		(*cmds)->cmd_path
-			= double_join((*cmds)->mypaths[i], (*cmds)->lst->cmd[0]);
+			= double_join((*cmds)->mypaths[i], (*cmds)->list->cmd[0]);
 		if (!access((*cmds)->cmd_path, F_OK))
 			break ;
 		free((*cmds)->cmd_path);
@@ -33,17 +33,17 @@ void	init_cmd_path(t_cmd	**cmds)
 	if (!(*cmds)->mypaths[i])
 	{
 		ft_putstr_fd(ERROR"minishell: command not found: "TEXT, 2);
-		ft_putendl_fd((*cmds)->lst->cmd[0], 2);
+		ft_putendl_fd((*cmds)->list->cmd[0], 2);
 		g_sig.ex_code = 127;
 	}
 }
 
-bool	init_env(t_lst	*list, t_cmd	*cmds)
+bool	init_env(t_lst	*lst, t_cmd	*cmds)
 {
-	while (list && ft_strncmp("PATH", list->var, ft_strlen("PATH")))
-		list = list->next;
-	if (list)
-		cmds->mypaths = ft_split(list->var + 5, ':');
+	while (lst && ft_strncmp("PATH", lst->var, ft_strlen("PATH")))
+		lst = lst->next;
+	if (lst)
+		cmds->mypaths = ft_split(lst->var + 5, ':');
 	else
 	{
 		cmds->mypaths = NULL;

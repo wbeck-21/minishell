@@ -22,7 +22,7 @@ static void	child(t_cmd	*cmds, char	**envp, t_proccess	**proc)
 	dup2((*proc)->fds[1], STDOUT_FILENO);
 	close((*proc)->fds[0]);
 	close((*proc)->fds[1]);
-	execve(cmds->cmd_path, cmds->lst->cmd, envp);
+	execve(cmds->cmd_path, cmds->list->cmd, envp);
 }
 
 static void	parents(t_proccess	**proc)
@@ -52,20 +52,20 @@ void	run_pipes(t_cmd	*cmds, t_proccess	*proc, t_mini	*mini, char	**envp)
 	size = ft_lstsize(mini->list);
 	if (!init_env(mini->lst, cmds))
 		return ;
-	while (mini->lst->next)
+	while (mini->list->next)
 	{
-		cmds->lst = mini->list;
+		cmds->list = mini->list;
 		pipex(cmds, envp, proc);
 		free(cmds->cmd_path);
-		mini->lst = mini->lst->next;
+		mini->list = mini->list->next;
 	}
-	cmds->lst = mini->list;
+	cmds->list = mini->list;
 	init_cmd_path(&cmds);
 	if (!cmds->cmd_path)
 		return ;
 	g_sig.pid = fork();
 	if (!g_sig.pid)
-		execve(cmds->cmd_path, cmds->lst->cmd, envp);
+		execve(cmds->cmd_path, cmds->list->cmd, envp);
 	else
 		wait_func(mini, size);
 	g_sig.pid = 0;

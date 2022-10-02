@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:20:01 by wbeck             #+#    #+#             */
-/*   Updated: 2022/09/20 22:20:01 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/10/02 12:31:26 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    mini_dq(char *cmd)
 {
     ft_putstr_fd("minishell: command not found: ", 2);
-    ft_putstr_fd("minishell: command not found: ", 2);
+   	ft_putnbr_fd(g_sig.ex_code, 2);
     cmd += 2;
     if (*cmd)
         ft_putstr_fd(cmd, 2);

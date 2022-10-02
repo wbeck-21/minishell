@@ -9,6 +9,14 @@ t_lst	*ft_lstlast_rem(t_lst *lst)
 	return (lst);
 }
 
+void	ft_lstdelone_rem(t_lst	*lst, void (*del)(void *))
+{
+	if (!lst)
+		return ;
+	(*del)(lst->var);
+	free(lst);
+}
+
 void	ft_lstclear_rem(t_lst	**lst, void (*del)(void *))
 {
 	t_lst	*tmp;
@@ -21,14 +29,6 @@ void	ft_lstclear_rem(t_lst	**lst, void (*del)(void *))
 		ft_lstdelone_rem(*lst, del);
 		*lst = tmp;
 	}
-}
-
-void	ft_lstdelone_rem(t_lst	*lst, void (*del)(void *))
-{
-	if (!lst)
-		return ;
-	(*del)(lst->var);
-	free(lst);
 }
 
 void	ft_lstadd_back_rem(t_lst **lst, t_lst *new)

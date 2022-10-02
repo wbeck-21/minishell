@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 14:24:13 by wbeck             #+#    #+#             */
-/*   Updated: 2021/10/10 14:41:51 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/10/02 13:53:15 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,6 @@ char	*get_next_line(int fd);
 int	ft_newline(const char *str);
 char	*ft_astrjoin(char *s1, char *s2);
 char	*ft_strnew(size_t size);
+char	*get_next_line(int fd);
+
 #endif

@@ -45,7 +45,7 @@ typedef struct s_list
 
 typedef struct s_cmd
 {
-	t_list	*lst;
+	t_list	*list;
 	char	**mypaths;
 	char	*cmd_path;
 	int		in;
@@ -154,8 +154,8 @@ int 	mini_env(t_lst *lst);
 void    mini_exit(char *cmd);
 int mini_export(t_lst **lst, char **cmds);
 int mini_history(t_list *history);
-void    mini_pwd(void);
-void    mini_shlvl(t_mini *mini, char **envp);
+int    mini_pwd(void);
+void    mini_shlvl(t_mini **mini, char **envp);
 void    mini_unset(t_lst **lst, char **cmd);
 void    ft_lstadd_preback(t_lst **lst, t_lst *new);
 void    exec(t_mini *mini, char **envp);
@@ -168,5 +168,6 @@ char	*double_join(char	*s1, char	*s2);
 void	wait_func(t_mini	*mini, int size);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int fd);
+char	*ft_strchr(const char *s, int c);
 t_lst	*ft_lstlastlast(t_lst *lst);
 #endif

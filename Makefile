@@ -26,7 +26,7 @@ DF		= $(SRC:.c=.d)
 RM 			= rm -rf
 
 %.o: %.c
-	$(CC) $(FLG) -o $@ -c $<
+	@$(CC) $(FLG) -o $@ -c $<
 
 all: 		$(NAME)
 
