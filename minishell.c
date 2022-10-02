@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/02 14:30:59 by ugina             #+#    #+#             */
+/*   Updated: 2022/10/02 14:34:54 by ugina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	wait_func(t_mini	*mini, int size)
@@ -36,10 +48,10 @@ t_lst	*envp_copy(char *envp[])
 	return (lst);
 }
 
-void minishell(t_mini *mini, char **env, char **str_s)
+void	minishell(t_mini *mini, char **env, char **str_s)
 {
-	int	i;
-	t_list *tmp;
+	t_list	*tmp;
+	int		i;
 
 	i = -1;
 	while (1)
@@ -48,9 +60,9 @@ void minishell(t_mini *mini, char **env, char **str_s)
 		dup2(mini->cmds.out, STDOUT_FILENO);
 		sigaction(SIGQUIT, &mini->sig, NULL);
 		sigaction(SIGINT, &mini->sig, NULL);
-		str_s[++i] = readline(MINISHELL"minishell $> "TEXT); // читает строку из консоли
-		if (!result_line(&str_s[i], &mini->history, mini)) // отправляем нашу строку, историю и структуру мини
-			continue;
+		str_s[++i] = readline(MINISHELL"minishell $> "TEXT);
+		if (!result_line(&str_s[i], &mini->history, mini))
+			continue ;
 		mini->list = do_split(str_s[i]);
 		free(str_s[i]);
 		tmp = mini->list;

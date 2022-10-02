@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/02 14:28:39 by ugina             #+#    #+#             */
+/*   Updated: 2022/10/02 14:30:38 by ugina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-#include "libft/libft.h"
 
 struct s_sig	g_sig;
 
@@ -19,7 +30,6 @@ void	actions(int signal_num, siginfo_t *info, void *old_info)
 {
 	(void)info;
 	(void)old_info;
-	
 	if (signal_num == SIGINT)
 	{
 		g_sig.ex_code = 130;
@@ -51,7 +61,7 @@ t_mini	*zero_init(char	**envp)
 	if (!mini)
 		return (NULL);
 	mini->change.in_redirect = 1;
-	mini->change.out_redirect= 2;
+	mini->change.out_redirect = 2;
 	mini->change.pipe = 3;
 	mini->change.cmd_separator = 4;
 	mini->change.tilda = 5;
@@ -89,12 +99,11 @@ static char	**init_shlvl(char	**envp)
 
 int	main(int argc, char **argv, char	**envp)
 {
+	t_mini	*mini;
+	char	*strs[10000];
+
 	(void)argc;
 	(void)argv;
-	
-	t_mini		*mini;
-	char		*strs[10000];
-
 	g_sig.ex_code = 0;
 	envp = init_shlvl(envp);
 	mini = zero_init(envp);

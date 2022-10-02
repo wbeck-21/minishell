@@ -3,46 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   mini_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:20:04 by wbeck             #+#    #+#             */
-/*   Updated: 2022/09/20 22:20:05 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/10/02 15:04:57 by ugina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int init_check(char *cmd, int *i)
+static int	init_check(char *cmd, int *i)
 {
-    int check;
-    int j;
+	int	check;
+	int	j;
 
-    check = 0;
-    if (cmd && !ft_strncmp(cmd, "-n", 2))
-    {
-        j = 1;
-        while (cmd[j] && cmd[j] == 'n')
-            j++;
-        if (!cmd[j])
-            check = 1;
-        else
-            check = 0;
-    }
-    if (check)
-        *i = 1;
-    return (check);
+	check = 0;
+	if (cmd && !ft_strncmp(cmd, "-n", 2))
+	{
+		j = 1;
+		while (cmd[j] && cmd[j] == 'n')
+			j++;
+		if (!cmd[j])
+			check = 1;
+		else
+			check = 0;
+	}
+	if (check)
+		*i = 1;
+	return (check);
 }
 
-// $? is the return code from the last run process. 
-// 0 means no error happened. Other values represent some kind of unusual condition.
-static char    *special_case(char *cmd)
+static char	*special_case(char *cmd)
 {
-    if (!ft_strncmp(cmd, "$?", 2))
-    {
-        ft_putnbr_fd(g_sig.ex_code, 1);
-        cmd += 2;
-    }
-    return (cmd);
+	if (!ft_strncmp(cmd, "$?", 2))
+	{
+		ft_putnbr_fd(g_sig.ex_code, 1);
+		cmd += 2;
+	}
+	return (cmd);
 }
 
 static int	tilda(char	*cmd, char	**envp)
@@ -69,34 +67,31 @@ static int	tilda(char	*cmd, char	**envp)
 			}
 		}
 		else
-            ft_putstr_fd("", 1);
+			ft_putstr_fd("", 1);
 	}
 	return (1);
 }
 
-// echo - команда Unix, предназначенная для отображения строки текста (выводит текст на стандартное устройство вывода).  
-// echo -n - не переносит строку
-
-int    mini_echo(char **cmd, char **envp)
+int	mini_echo(char **cmd, char **envp)
 {
-    int check;
-    int i;
+	int	check;
+	int	i;
 
-    i = 0;
-    check = init_check(cmd[1], &i);
-    while (cmd[++i])
-    {
-        if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
-            continue;
-        cmd[i] = special_case(cmd[i]);
-        if (!tilda(cmd[i], envp))
-            cmd[i]++;
-        ft_putstr_fd(cmd[i], 1);
-        if (cmd[i + 1])
-            ft_putchar_fd(' ', 1);
-    }
-    if (!check)
-        ft_putchar_fd('\n', 1);
-    g_sig.ex_code = 0;
-    return (0);
+	i = 0;
+	check = init_check(cmd[1], &i);
+	while (cmd[++i])
+	{
+		if (cmd[i] && !ft_strncmp(cmd[i], "-n", 2))
+			continue ;
+		cmd[i] = special_case(cmd[i]);
+		if (!tilda(cmd[i], envp))
+			cmd[i]++;
+		ft_putstr_fd(cmd[i], 1);
+		if (cmd[i + 1])
+			ft_putchar_fd(' ', 1);
+	}
+	if (!check)
+		ft_putchar_fd('\n', 1);
+	g_sig.ex_code = 0;
+	return (0);
 }

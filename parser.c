@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/02 14:35:42 by ugina             #+#    #+#             */
+/*   Updated: 2022/10/02 14:37:15 by ugina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 bool	preparser(char	*str)
@@ -41,9 +53,9 @@ t_list	*do_split(char	*str)
 	return (list);
 }
 
-char *parser(char *str, t_mini *mini, int i, int flag)
+char	*parser(char *str, t_mini *mini, int i, int flag)
 {
-   if (!pre_check(str))
+	if (!pre_check(str))
 		return (NULL);
 	while (*(str + i))
 	{
@@ -72,25 +84,25 @@ char *parser(char *str, t_mini *mini, int i, int flag)
 
 bool	result_line(char	**str, t_list	**history, t_mini	*mini)
 {
-    int i;
+	int	i;
 
-    if (!*str)
-        handle_free(*str, *history, mini);
-    i = 0;
-    while (**str != '\0' && (**str == ' ' || **str == '\t'))
-        (*str)++; 
-    if (!*str[i])
-        return (false); 
-    *history = make_history(*str, *history);
-    add_history(*str);
-    *str = parser(*str, mini, 0, 0);
-    if (!*str)
-        return (false);
-    i = 0;
-    while (str[0][i] && str[0][i] == ' ')
-        i++;
-    if (!str[0][i])
-        return (false);
-    return (true);
+	if (!*str)
+		handle_free(*str, *history, mini);
+	i = 0;
+	while (**str != '\0' && (**str == ' ' || **str == '\t'))
+		(*str)++;
+	if (!*str[i])
+		return (false);
+	*history = make_history(*str, *history);
+	add_history(*str);
+	*str = parser(*str, mini, 0, 0);
+	if (!*str)
+		return (false);
+	i = 0;
+	while (str[0][i] && str[0][i] == ' ')
+		i++;
+	if (!str[0][i])
+		return (false);
+	return (true);
 }
 //sudo apt-get install libreadline-dev 

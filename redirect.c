@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/02 14:38:09 by ugina             #+#    #+#             */
+/*   Updated: 2022/10/02 14:38:20 by ugina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static char	*append_out(char	*str, int *i, t_mini	**mini)
@@ -88,7 +100,6 @@ char	*input(char	*str, int *i, t_mini	**mini)
 	close((*mini)->proc.fdin);
 	return (free_fd(str, filename, j, *i));
 }
-
 
 char	*redirect(char	*str, t_mini	**mini)
 {

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 22:20:08 by wbeck             #+#    #+#             */
-/*   Updated: 2022/09/20 22:20:08 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/10/02 14:50:06 by ugina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int mini_env(t_lst *lst)
+int	mini_env(t_lst *lst)
 {
-    while (lst)
-    {
-        ft_putstr_fd(lst->var, 1);
-        write(1, "\n", 1);
-        lst = lst->next;
-    }
-	g_sig.ex_code = 0;  
-    return (0); 
+	while (lst)
+	{
+		ft_putstr_fd(lst->var, 1);
+		write(1, "\n", 1);
+		lst = lst->next;
+	}
+	g_sig.ex_code = 0;
+	return (0);
 }

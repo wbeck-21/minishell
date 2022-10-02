@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/02 14:38:27 by ugina             #+#    #+#             */
+/*   Updated: 2022/10/02 14:38:38 by ugina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	make_split(t_list **list)
@@ -18,7 +30,7 @@ void	del(void *var)
 	var = NULL;
 }
 
-char	*insert_inside_gap2(t_inside_gap_2	change, char *content) // возвращает в строку символы,  которые пропали из-за сплита и result_line()
+char	*insert_inside_gap2(t_inside_gap_2	change, char *content)
 {
 	int	i;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/02 14:31:48 by ugina             #+#    #+#             */
+/*   Updated: 2022/10/02 15:00:11 by ugina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -74,12 +86,12 @@ typedef struct s_pre
 
 typedef struct s_inside_gap2
 {
-	char	in_redirect; // (<)
-	char	out_redirect; // (>)
-	char	pipe; // (|)
-	char	cmd_separator; // бывшая point_coma (;)
-	char	tilda; // (~)
-	char	gap; // (\')  про эту херь не очень понятно
+	char	in_redirect;
+	char	out_redirect;
+	char	pipe;
+	char	cmd_separator;
+	char	tilda;
+	char	gap;
 }				t_inside_gap_2;
 
 typedef struct s_mini
@@ -94,7 +106,7 @@ typedef struct s_mini
 	int					shlvl;
 }				t_mini;
 
-char    *pwd_cur(void);
+char	*pwd_cur(void);
 void	minishell(t_mini *mini, char **env, char **str_s);
 t_lst	*envp_copy(char *envp[]);
 bool	result_line(char	**str, t_list	**history, t_mini	*mini);
@@ -123,7 +135,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-int	ft_isdigit(int c);
+int		ft_isdigit(int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 char	*ft_itoa(int n);;
@@ -138,31 +150,30 @@ char	*get_filename(char	*str, int i, int *j);
 char	*free_fd(char	*str, char *filename, int j, int i);
 char	*read_heredoc(char	*lim, char	*str, int i, int j);
 bool	check_filename(char	*filename, char	*str);
-int	get_size_pipes(char const	*s, char c);
+int		get_size_pipes(char const	*s, char c);
 void	ft_lstdelone_rem(t_lst	*lst, void (*del)(void *));
-int	ft_isalnum(int c);
+int		ft_isalnum(int c);
 int		ft_atoi(const char *str);
 t_list	*do_split(char	*str);
 void	free_mem(char	**strs);
 char	*insert_inside_gap2(t_inside_gap_2	change, char *content);
 void	make_split(t_list **list);
-int    mini_cd(char *path, t_lst **lst);
-void    mini_dq(char *cmd);
-void    mini_dq(char *cmd);
-int    mini_echo(char **cmd, char **envp);
-int 	mini_env(t_lst *lst);
-void    mini_exit(char *cmd);
-int mini_export(t_lst **lst, char **cmds);
-int mini_history(t_list *history);
-int    mini_pwd(void);
-void    mini_shlvl(t_mini **mini, char **envp);
-void    mini_unset(t_lst **lst, char **cmd);
-void    ft_lstadd_preback(t_lst **lst, t_lst *new);
-void    exec(t_mini *mini, char **envp);
+int		mini_cd(char *path, t_lst **lst);
+void	mini_dq(char *cmd);
+int		mini_echo(char **cmd, char **envp);
+int		mini_env(t_lst *lst);
+void	mini_exit(char *cmd);
+int		mini_export(t_lst **lst, char **cmds);
+int		mini_history(t_list *history);
+int		mini_pwd(void);
+void	mini_shlvl(t_mini **mini, char **envp);
+void	mini_unset(t_lst **lst, char **cmd);
+void	ft_lstadd_preback(t_lst **lst, t_lst *new);
+void	exec(t_mini *mini, char **envp);
 char	**ft_split(char const *s, char c);
 void	run_pipes(t_cmd	*cmds, t_proccess	*proc, t_mini	*mini, char	**envp);
 void	init_cmd_path(t_cmd	**cmds);
-int	ft_lstsize(t_list *lst);
+int		ft_lstsize(t_list *lst);
 bool	init_env(t_lst	*list, t_cmd	*cmds);
 char	*double_join(char	*s1, char	*s2);
 void	wait_func(t_mini	*mini, int size);
@@ -170,4 +181,8 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int fd);
 char	*ft_strchr(const char *s, int c);
 t_lst	*ft_lstlastlast(t_lst *lst);
+t_lst	*make_copy_env(t_lst	*lst);
+void	print_sort_env(t_lst *lst);
+void	just_print(t_lst	*lst);
+
 #endif

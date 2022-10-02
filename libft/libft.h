@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: ugina <ugina@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 14:24:13 by wbeck             #+#    #+#             */
-/*   Updated: 2022/10/02 13:53:15 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/10/02 15:14:45 by ugina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include "unistd.h"
-#include "stdlib.h"
+# include "unistd.h"
+# include "stdlib.h"
 # include "../minishell.h"
 
 int		ft_isalpha(int c);
@@ -61,7 +61,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*get_next_line(int fd);
-int	ft_newline(const char *str);
+int		ft_newline(const char *str);
 char	*ft_astrjoin(char *s1, char *s2);
 char	*ft_strnew(size_t size);
 char	*get_next_line(int fd);
